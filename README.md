@@ -1,3 +1,13 @@
+This repo is solely meant for automated updates of dependencies found in kelektiv's [node.bcrypt.js](https://github.com/kelektiv/node.bcrypt.js) package.
+
+PRs will not be accepted for new features or bug fixes. Reach out to the original maintainer.
+
+```
+npm install bcrypt-updated
+```
+
+---
+
 # node.bcrypt.js
 [![Build Status](https://travis-ci.org/kelektiv/node.bcrypt.js.svg?branch=master)](https://travis-ci.org/kelektiv/node.bcrypt.js)
 [![Dependency Status](https://david-dm.org/kelektiv/node.bcrypt.js.svg)](https://david-dm.org/kelektiv/node.bcrypt.js)
