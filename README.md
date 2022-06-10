@@ -6,6 +6,8 @@ PRs will not be accepted for new features or bug fixes. Reach out to the origina
 npm install bcrypt-updated
 ```
 
+[![Build status](https://ci.appveyor.com/api/projects/status/207m6s2567v0vq3i?svg=true)](https://ci.appveyor.com/project/ItzRabbs/node-bcrypt-js)
+
 ---
 
 # node.bcrypt.js
