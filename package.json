@@ -11,6 +11,7 @@
     "crypto"
   ],
   "main": "./bcrypt",
+  "types": "index.d.ts",
   "version": "5.0.1",
   "author": "Nick Campbell (https://github.com/ncb000gt)",
   "engines": {
@@ -25,6 +26,7 @@
     "url": "https://github.com/kelektiv/node.bcrypt.js/issues"
   },
   "scripts": {
+    "copy-types": "copyfiles -u 3 \"node_modules/@types/bcrypt/*.d.ts\" .",
     "test": "npm install --build-from-source && nodeunit test",
     "install": "node-pre-gyp install --fallback-to-build"
   },
@@ -33,6 +35,8 @@
     "node-addon-api": "^5.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "copyfiles": "^2.4.1",
     "nodeunit-v1": "^1.0.1"
   },
   "contributors": [
