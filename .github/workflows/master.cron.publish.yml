@@ -3,7 +3,7 @@ name: Publish
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: "0 9 * * *"
 
 jobs:
   run:
@@ -15,12 +15,12 @@ jobs:
         with:
           node-version: 16
       - run: npm install
-      
+
       - run: npm run copy-types
 
       - uses: codfish/semantic-release-action@v1
         with:
-          repository_url: https://github.com/itzrabbs/node.bcrypt.js.git
+          repository_url: https://github.com/${{github.REPOSITORY}}.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
