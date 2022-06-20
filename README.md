@@ -6,11 +6,12 @@ PRs will not be accepted for new features or bug fixes. Reach out to the origina
 npm install bcrypt-updated
 ```
 
-[![Build status](https://ci.appveyor.com/api/projects/status/3wcp99by0f92dyvv?svg=true)](https://ci.appveyor.com/project/RabbitPlayground/node-bcrypt-js)
+[![Build status](https://ci.appveyor.com/api/projects/status/3wcp99by0f92dyvv?svg=true)](https://ci.appveyor.com/project/fast-facts/node-bcrypt-js)
 
 ---
 
 # node.bcrypt.js
+
 [![Build Status](https://travis-ci.org/kelektiv/node.bcrypt.js.svg?branch=master)](https://travis-ci.org/kelektiv/node.bcrypt.js)
 [![Dependency Status](https://david-dm.org/kelektiv/node.bcrypt.js.svg)](https://david-dm.org/kelektiv/node.bcrypt.js)
 
@@ -24,7 +25,6 @@ You can read about [bcrypt in Wikipedia][bcryptwiki] as well as in the following
 Verify that the node version you are using is a _stable_ version; it has an even major release number. Unstable versions are currently not supported and issues created while using an unstable version will be closed.
 
 If you are on a stable version of node, please provide a sufficient code snippet or log files for installation issues. The code snippet does not require you to include confidential information. However, it must provide enough information such that the problem can be replicable. Issues which are closed without resolution often lack required information for replication.
-
 
 ## Version Compatibility
 
@@ -46,7 +46,7 @@ gyp ERR! stack Error: "pre" versions of node cannot be installed, use the --node
 
 ## Security Issues And Concerns
 
-> Per bcrypt implementation, only the first 72 bytes of a string are used. Any extra bytes are ignored when matching passwords. Note that this is not the first 72 *characters*. It is possible for a string to contain less than 72 characters, while taking up more than 72 bytes (e.g. a UTF-8 encoded string containing emojis).
+> Per bcrypt implementation, only the first 72 bytes of a string are used. Any extra bytes are ignored when matching passwords. Note that this is not the first 72 _characters_. It is possible for a string to contain less than 72 characters, while taking up more than 72 bytes (e.g. a UTF-8 encoded string containing emojis).
 
 As should be the case with any security tool, this library should be scrutinized by anyone using it. If you find or suspect an issue with the code, please bring it to my attention and I'll spend some time trying to make sure that this tool is as secure as possible.
 
@@ -72,9 +72,9 @@ Hashes generated in `v2.x.x` using the defaults parameters will not work in earl
 
 * NodeJS
 * `node-gyp`
- * Please check the dependencies for this tool at: https://github.com/nodejs/node-gyp
-  * Windows users will need the options for c# and c++ installed with their visual studio instance.
-  * Python 2.x
+* Please check the dependencies for this tool at: <https://github.com/nodejs/node-gyp>
+* Windows users will need the options for c# and c++ installed with their visual studio instance.
+* Python 2.x
 * `OpenSSL` - This is only required to build the `bcrypt` project if you are using versions <= 0.7.7. Otherwise, we're using the builtin node crypto bindings for seed data (which use the same OpenSSL code paths we were, but don't have the external dependency).
 
 ## Install via NPM
@@ -82,6 +82,7 @@ Hashes generated in `v2.x.x` using the defaults parameters will not work in earl
 ```
 npm install bcrypt
 ```
+
 ***Note:*** OS X users using Xcode 4.3.1 or above may need to run the following command in their terminal prior to installing if errors occur regarding xcodebuild: ```sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer```
 
 _Pre-built binaries for various NodeJS versions are made available on a best-effort basis._
@@ -113,7 +114,7 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 ```
 
-#### To hash a password:
+#### To hash a password
 
 Technique 1 (generate a salt and hash on separate function calls):
 
@@ -135,7 +136,7 @@ bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
 
 Note that both techniques achieve the same end-result.
 
-#### To check a password:
+#### To check a password
 
 ```javascript
 // Load hash from your password DB.
@@ -160,6 +161,7 @@ bcrypt.hash(myPlaintextPassword, saltRounds).then(function(hash) {
     // Store hash in your password DB.
 });
 ```
+
 ```javascript
 // Load hash from your password DB.
 bcrypt.compare(myPlaintextPassword, hash).then(function(result) {
@@ -187,6 +189,7 @@ async function checkUser(username, password) {
 ```
 
 ### ESM import
+
 ```javascript
 import bcrypt from "bcrypt";
 
@@ -203,7 +206,7 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 ```
 
-#### To hash a password:
+#### To hash a password
 
 Technique 1 (generate a salt and hash on separate function calls):
 
@@ -222,7 +225,7 @@ const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 
 As with async, both techniques achieve the same end-result.
 
-#### To check a password:
+#### To check a password
 
 ```javascript
 // Load hash from your password DB.
@@ -233,41 +236,42 @@ bcrypt.compareSync(someOtherPlaintextPassword, hash); // false
 [A Note on Timing Attacks](#a-note-on-timing-attacks)
 
 ### Why is async mode recommended over sync mode?
+
 If you are using bcrypt on a simple script, using the sync mode is perfectly fine. However, if you are using bcrypt on a server, the async mode is recommended. This is because the hashing done by bcrypt is CPU intensive, so the sync version will block the event loop and prevent your application from servicing any other inbound requests or events. The async version uses a thread pool which does not block the main event loop.
 
 ## API
 
 `BCrypt.`
 
-  * `genSaltSync(rounds, minor)`
-    * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
-    * `minor` - [OPTIONAL] - minor version of bcrypt to use. (default - b)
-  * `genSalt(rounds, minor, cb)`
-    * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
-    * `minor` - [OPTIONAL] - minor version of bcrypt to use. (default - b)
-    * `cb` - [OPTIONAL] - a callback to be fired once the salt has been generated. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
-      * `err` - First parameter to the callback detailing any errors.
-      * `salt` - Second parameter to the callback providing the generated salt.
-  * `hashSync(data, salt)`
-    * `data` - [REQUIRED] - the data to be encrypted.
-    * `salt` - [REQUIRED] - the salt to be used to hash the password. if specified as a number then a salt will be generated with the specified number of rounds and used (see example under **Usage**).
-  * `hash(data, salt, cb)`
-    * `data` - [REQUIRED] - the data to be encrypted.
-    * `salt` - [REQUIRED] - the salt to be used to hash the password. if specified as a number then a salt will be generated with the specified number of rounds and used (see example under **Usage**).
-    * `cb` - [OPTIONAL] - a callback to be fired once the data has been encrypted. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
-      * `err` - First parameter to the callback detailing any errors.
-      * `encrypted` - Second parameter to the callback providing the encrypted form.
-  * `compareSync(data, encrypted)`
-    * `data` - [REQUIRED] - data to compare.
-    * `encrypted` - [REQUIRED] - data to be compared to.
-  * `compare(data, encrypted, cb)`
-    * `data` - [REQUIRED] - data to compare.
-    * `encrypted` - [REQUIRED] - data to be compared to.
-    * `cb` - [OPTIONAL] - a callback to be fired once the data has been compared. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
-      * `err` - First parameter to the callback detailing any errors.
-      * `same` - Second parameter to the callback providing whether the data and encrypted forms match [true | false].
-  * `getRounds(encrypted)` - return the number of rounds used to encrypt a given hash
-    * `encrypted` - [REQUIRED] - hash from which the number of rounds used should be extracted.
+* `genSaltSync(rounds, minor)`
+  * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
+  * `minor` - [OPTIONAL] - minor version of bcrypt to use. (default - b)
+* `genSalt(rounds, minor, cb)`
+  * `rounds` - [OPTIONAL] - the cost of processing the data. (default - 10)
+  * `minor` - [OPTIONAL] - minor version of bcrypt to use. (default - b)
+  * `cb` - [OPTIONAL] - a callback to be fired once the salt has been generated. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
+    * `err` - First parameter to the callback detailing any errors.
+    * `salt` - Second parameter to the callback providing the generated salt.
+* `hashSync(data, salt)`
+  * `data` - [REQUIRED] - the data to be encrypted.
+  * `salt` - [REQUIRED] - the salt to be used to hash the password. if specified as a number then a salt will be generated with the specified number of rounds and used (see example under **Usage**).
+* `hash(data, salt, cb)`
+  * `data` - [REQUIRED] - the data to be encrypted.
+  * `salt` - [REQUIRED] - the salt to be used to hash the password. if specified as a number then a salt will be generated with the specified number of rounds and used (see example under **Usage**).
+  * `cb` - [OPTIONAL] - a callback to be fired once the data has been encrypted. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
+    * `err` - First parameter to the callback detailing any errors.
+    * `encrypted` - Second parameter to the callback providing the encrypted form.
+* `compareSync(data, encrypted)`
+  * `data` - [REQUIRED] - data to compare.
+  * `encrypted` - [REQUIRED] - data to be compared to.
+* `compare(data, encrypted, cb)`
+  * `data` - [REQUIRED] - data to compare.
+  * `encrypted` - [REQUIRED] - data to be compared to.
+  * `cb` - [OPTIONAL] - a callback to be fired once the data has been compared. uses eio making it asynchronous. If `cb` is not specified, a `Promise` is returned if Promise support is available.
+    * `err` - First parameter to the callback detailing any errors.
+    * `same` - Second parameter to the callback providing whether the data and encrypted forms match [true | false].
+* `getRounds(encrypted)` - return the number of rounds used to encrypt a given hash
+  * `encrypted` - [REQUIRED] - hash from which the number of rounds used should be extracted.
 
 ## A Note on Rounds
 
@@ -285,7 +289,6 @@ From @garthk, on a 2GHz core you can roughly expect:
     rounds=15: ~3 sec/hash
     rounds=25: ~1 hour/hash
     rounds=31: 2-3 days/hash
-
 
 ## A Note on Timing Attacks
 
@@ -307,12 +310,13 @@ Resultant hashes will be 60 characters long and they will include the salt among
 
 `$[algorithm]$[cost]$[salt][hash]`
 
-- 2 chars hash algorithm identifier prefix. `"$2a$" or "$2b$"` indicates BCrypt
-- Cost-factor (n). Represents the exponent used to determine how many iterations 2^n
-- 16-byte (128-bit) salt, base64 encoded to 22 characters
-- 24-byte (192-bit) hash, base64 encoded to 31 characters
+* 2 chars hash algorithm identifier prefix. `"$2a$" or "$2b$"` indicates BCrypt
+* Cost-factor (n). Represents the exponent used to determine how many iterations 2^n
+* 16-byte (128-bit) salt, base64 encoded to 22 characters
+* 24-byte (192-bit) hash, base64 encoded to 31 characters
 
 Example:
+
 ```
 $2b$10$nOUIs5kJ7naTuTFkBy1veuK0kSxUFXfuaOKdOKf9xYT0KKIGSJwFa
  |  |  |                     |
@@ -363,6 +367,7 @@ The code for this comes from a few sources:
 * [Nicola Del Gobbo][NickNaso] - Initial implementation with N-API
 
 ## License
+
 Unless stated elsewhere, file headers or otherwise, the license as stated in the LICENSE file.
 
 [bcryptwiki]: https://en.wikipedia.org/wiki/Bcrypt
