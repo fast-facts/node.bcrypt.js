@@ -31,7 +31,7 @@
     "install": "node-pre-gyp install --fallback-to-build"
   },
   "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.9",
+    "@mapbox/node-pre-gyp": "^1.0.10",
     "node-addon-api": "^5.0.0"
   },
   "devDependencies": {
