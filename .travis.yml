@@ -15,7 +15,6 @@ arch:
 - arm64
 
 node_js:
-- '14'
 - '16'
 - '18'
 
@@ -56,6 +55,6 @@ deploy:
   file_glob: true
   file: build/stage/kelektiv/node.bcrypt.js/releases/download/*/*
   on:
-    node_js: '10'
+    node_js: '16'
     repo: kelektiv/node.bcrypt.js
     tags: true
