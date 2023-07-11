@@ -20,7 +20,7 @@ jobs:
 
       - run: npm run copy-types
 
-      - uses: codfish/semantic-release-action@v1
+      - uses: codfish/semantic-release-action@v2
         with:
           repository_url: https://github.com/${{github.REPOSITORY}}.git
         env:
