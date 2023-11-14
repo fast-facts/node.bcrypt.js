@@ -6,15 +6,11 @@ PRs will not be accepted for new features or bug fixes. Reach out to the origina
 npm install bcrypt-updated
 ```
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ohar8be2k3kfpw0j/branch/master?svg=true)](https://ci.appveyor.com/project/fast-facts/node-bcrypt-js/branch/master)
-
 ---
 
 # node.bcrypt.js
 
 [![ci](https://github.com/kelektiv/node.bcrypt.js/actions/workflows/ci.yaml/badge.svg)](https://github.com/kelektiv/node.bcrypt.js/actions/workflows/ci.yaml)
-
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/kelektiv/node.bcrypt.js)](https://ci.appveyor.com/project/defunctzombie/node-bcrypt-js-pgo26/branch/master)
 
 A library to help you hash passwords.
 
