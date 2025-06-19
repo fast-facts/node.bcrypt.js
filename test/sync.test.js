@@ -16,11 +16,11 @@ test('salt_no_params', () => {
 })
 
 test('salt_rounds_is_string_number', () => {
-    expect(() => bcrypt.genSaltSync('10')).toThrowError('rounds must be a number');
+    expect(() => bcrypt.genSaltSync('10')).toThrow('rounds must be a number');
 })
 
 test('salt_rounds_is_NaN', () => {
-    expect(() => bcrypt.genSaltSync('b')).toThrowError("rounds must be a number");
+    expect(() => bcrypt.genSaltSync('b')).toThrow("rounds must be a number");
 })
 
 test('salt_minor_a', () => {
@@ -48,8 +48,8 @@ test('hash_rounds', () => {
 
 test('hash_empty_string', () => {
     expect(() => bcrypt.hashSync('', bcrypt.genSaltSync(10))).not.toThrow();
-    expect(() => bcrypt.hashSync('password', '')).toThrowError('Invalid salt. Salt must be in the form of: $Vers$log2(NumRounds)$saltvalue');
-    expect(() => bcrypt.hashSync('', '')).toThrowError('Invalid salt. Salt must be in the form of: $Vers$log2(NumRounds)$saltvalue');
+    expect(() => bcrypt.hashSync('password', '')).toThrow('Invalid salt. Salt must be in the form of: $Vers$log2(NumRounds)$saltvalue');
+    expect(() => bcrypt.hashSync('', '')).toThrow('Invalid salt. Salt must be in the form of: $Vers$log2(NumRounds)$saltvalue');
 })
 
 test('hash_pw_no_params', () => {
