@@ -35,7 +35,7 @@
     "node-addon-api": "^8.5.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcrypt": "^6.0.0",
     "copyfiles": "^2.4.1",
     "jest": "^30.0.4"
   },
