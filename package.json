@@ -37,7 +37,7 @@
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "copyfiles": "^2.4.1",
-    "jest": "^30.0.4"
+    "jest": "^30.0.5"
   },
   "contributors": [
     "Antonio Salazar Cardozo <savedfastcool@gmail.com> (https://github.com/Shadowfiend)",
